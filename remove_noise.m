@@ -6,5 +6,5 @@ function filtered_audio = remove_noise(audio_in ,sample_frequency, pass_band_f, 
     [soslp,glp] = zp2sos(z,p,k); 
     %freqz(soslp, 2^16, sample_frequency);                                
     filtered_audio = filtfilt(soslp, glp, audio_in);
-    sound(filtered_audio, sample_frequency);
+    %sound(filtered_audio, sample_frequency);
 end

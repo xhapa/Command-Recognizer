@@ -27,10 +27,12 @@ audiowrite('Ref-Audios\Instruction.wav', recorded_audio, recording_frequency);
 % Read audio
 audio_instruction = audioread('Ref-Audios\Instruction.wav');
 
-% Audio Normalization
-audio_instruction_norm = audio_normalization(audio_instruction, amplitude_ratio);
-
-%sound(audio_instruction_norm, recording_frequency);
-
 % Audio filtered
-audio_filtered = remove_noise(audio_instruction_norm, recording_frequency, [700, 11000], [690, 11010], 1, 150);
+audio_filtered = remove_noise(audio_instruction, recording_frequency, [700, 11000], [690, 11010], 1, 150);
+
+% Audio Normalization
+audio_instruction_norm = audio_normalization(audio_filtered, amplitude_ratio);
+
+%sound(audio_start, recording_frequency);
+
+plot_time_audio(audio_instruction_norm, recording_frequency);
