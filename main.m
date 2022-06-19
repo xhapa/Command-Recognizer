@@ -2,6 +2,7 @@
 
 record_time = 3;
 recording_frequency = 44100;
+amplitude_ratio = sqrt(0.5);  %-3dB
 
 recorder = audiorecorder(recording_frequency, 24, 1);
 
@@ -13,3 +14,13 @@ recordblocking(recorder, record_time);
 recorded_audio = recorder.getaudiodata();
 
 audiowrite('Ref-Audios\Instruction.wav', recorded_audio, recording_frequency);
+
+%sound(recorded_audio, recording_frequency);
+
+audio_instruction = audioread('Ref-Audios\Instruction.wav');
+
+audio_instruction_norm = audio_normalization(audio_instruction, amplitude_ratio);
+
+%sound(audio_instruction_norm, recording_frequency);
+
+audio_filtered = remove_noise(audio_instruction_norm, recording_frequency, [700, 11000], [690, 11010], 1, 150);
