@@ -7,7 +7,7 @@ recording_frequency = 44100;
 [audio_start, audio_stop, audio_left, audio_right, audio_up, audio_down, audio_back, audio_forward]=load_ref_audios();
 
 % Recorder object
-recorder = audiorecorder(recording_frequency, 24, 1);
+recorder = audiorecorder(recording_frequency, 24, 2);
 
 recorder.StartFcn = 'disp(''Recording audio'')';
 recorder.StopFcn = 'disp(''Recorded  audio'')';
@@ -24,10 +24,7 @@ audiowrite('Ref-Audios\Instruction.wav', recorded_audio, recording_frequency);
 %sound(recorded_audio, recording_frequency);
 
 % Read audio
-[audio_instruction, fs] = audioread('Ref-Audios\Instruction.wav');
-N = length(audio_instruction);
-duration = N/fs;
-audio_instruction = audio_instruction .* hamming(fs*duration);
+audio_instruction = stereo_to_mono("Ref-Audios\Instruction.wav");
 
 % Preprocessing
 audio_start = preprocessing(audio_start);
@@ -68,8 +65,3 @@ plot_time_audio(audio_instruction, recording_frequency);
 plot_time_audio(audio_start, recording_frequency);
 
 max_v = max_values(audio_start, audio_start);
-
-y1 = conv(audio_start, fliplr(audio_instruction));
-y2 = conv(audio_start, fliplr(audio_start));
-plot_time_audio(y1, recording_frequency);
-plot_time_audio(y2, recording_frequency);
