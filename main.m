@@ -64,4 +64,13 @@ subplot(3,4,9), plot(fft_instruction), title('FFT Instruction');
 plot_time_audio(audio_instruction, recording_frequency);
 plot_time_audio(audio_start, recording_frequency);
 
-max_v = max_values(audio_start, audio_start);
+max_v_start = max_values(audio_start, audio_start);
+max_v_stop = max_values(audio_stop, audio_stop);
+max_v_left = max_values(audio_left, audio_left);
+max_v_right = max_values(audio_right, audio_right);
+max_v_up = max_values(audio_up, audio_up);
+max_v_down = max_values(audio_down, audio_down);
+max_v_back = max_values(audio_back, audio_back);
+max_v_forward = max_values(audio_forward, audio_forward);
+
+
