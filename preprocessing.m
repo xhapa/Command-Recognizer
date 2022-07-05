@@ -1,7 +1,4 @@
 function audio = preprocessing(audio)
-a = [0.1 -0.95];
-b = [1 -0.99];
-
-audio = filter(a, b, audio);
+audio = remove_noise(audio, 8000, 1, 150);
 audio = audio_normalization(audio);
 end

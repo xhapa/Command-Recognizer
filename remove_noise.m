@@ -1,6 +1,6 @@
-function filtered_audio = remove_noise(audio_in ,sample_frequency, pass_band_f, stop_band_f, pass_band_ripple, stop_band_ripple)
-    wp = pass_band_f/(sample_frequency/2);    
-    ws = stop_band_f/(sample_frequency/2);
+function filtered_audio = remove_noise(audio_in ,sample_frequency, pass_band_ripple, stop_band_ripple)
+    wp = [2*350,2*1750]/sample_frequency;    
+    ws = [2*450,2*1550]/sample_frequency;
     [n,ws] = cheb2ord(wp,ws,pass_band_ripple,stop_band_ripple); 
     [z,p,k] = cheby2(n,stop_band_ripple,ws,"bandpass");                      
     [soslp,glp] = zp2sos(z,p,k); 
